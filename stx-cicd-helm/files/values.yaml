@@ -1,5 +1,4 @@
 images:
-  tags: docker.io/jenkins/jenkins:lts
----
-images:
-  tags: docker.io/gitlab/gitlab-ce:10.6.2-ce.0
+  tags: 
+    jenkins: docker.io/jenkins/jenkins:lts
+    gitlab: docker.io/gitlab/gitlab-ce:10.6.2-ce.0

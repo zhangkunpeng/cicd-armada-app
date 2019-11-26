@@ -1,0 +1,107 @@
+---
+schema: armada/ChartGroup/v1
+metadata:
+  schema: metadata/Document/v1
+  name: gitlab-ce
+data:
+  description: "Deploy gitlab-ce"
+  sequenced: true
+  chart_group:
+    - gitlab-ce
+---
+schema: armada/ChartGroup/v1
+metadata:
+  schema: metadata/Document/v1
+  name: jenkins
+data:
+  description: "Deploy Jenkins"
+  sequenced: true
+  chart_group:
+    - jenkins
+---
+schema: armada/Manifest/v1
+metadata:
+  schema: metadata/Document/v1
+  name: cicd-armada-manifest
+data:
+  release_prefix: cicd
+  chart_groups:
+    - jenkins
+    - gitlab-ce
+---
+schema: armada/Chart/v1
+metadata:
+  schema: metadata/Document/v1
+  name: jenkins
+data:
+  chart_name: jenkins
+  release: jenkins
+  namespace: stx-cicd
+  wait:
+    timeout: 600
+    labels:
+      release: cicd-jenkins
+  test:
+    enabled: false
+  install:
+    no_hooks: false
+  upgrade:
+    no_hooks: false
+    pre:
+      delete:
+        - type: job
+          labels:
+            release: cicd-jenkins
+        - type: pod
+          labels:
+            release: cicd-jenkins
+            component: test
+  values:
+    master:
+      adminPassword: 99cloud@SH
+      serviceType: NodePort
+      nodePort: 32000
+  source:
+    type: tar
+    location: http://172.17.0.1:8080/helm_charts/starlingx/jenkins-1.9.2.tgz
+    subpath: jenkins
+    reference: master
+  dependencies: []
+---
+schema: armada/Chart/v1
+metadata:
+  schema: metadata/Document/v1
+  name: gitlab-ce
+data:
+  chart_name: gitlab-ce
+  release: gitlab-ce
+  namespace: stx-cicd
+  wait:
+    timeout: 600
+    labels:
+      release: cicd-gitlab-ce
+  test:
+    enabled: false
+  install:
+    no_hooks: false
+  upgrade:
+    no_hooks: false
+    pre:
+      delete:
+        - type: job
+          labels:
+            release: cicd-gitlab-ce
+        - type: pod
+          labels:
+            release: cicd-gitlab-ce
+            component: test
+  values:
+    gitlabRootPassword: "99cloud@SH"
+    externalUrl: http://gitlab.starlingx.com/
+    image: gitlab/gitlab-ce:10.6.2-ce.0
+  source:
+    type: tar
+    location: http://172.17.0.1:8080/helm_charts/starlingx/gitlab-ce-0.2.2.tgz
+    subpath: gitlab-ce
+    reference: master
+  dependencies: []

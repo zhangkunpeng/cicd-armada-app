@@ -60,7 +60,7 @@ data:
     master:
       adminPassword: 99cloud@SH
       serviceType: NodePort
-      nodePort: 32000
+      nodePort: 32222
       image: docker.io/jenkins/jenkins
       tag: lts
     image:

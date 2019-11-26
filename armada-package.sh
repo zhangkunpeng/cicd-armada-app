@@ -16,7 +16,7 @@ function build_application_tarball {
         echo "Failed to copy the manifests to ${BUILD_OUTPUT_PATH}/staging" >&2
         exit 1
     fi
-
+    cp stx-cicd-helm/files/* staging/.
     cd staging
     # Add metadata file
     touch metadata.yaml

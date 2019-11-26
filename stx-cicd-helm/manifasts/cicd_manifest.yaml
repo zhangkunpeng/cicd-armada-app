@@ -63,6 +63,9 @@ data:
       nodePort: 32000
       image: docker.io/jenkins/jenkins
       tag: lts
+    image:
+      repository: docker.io/jenkins/jenkins
+      tag: lts
   source:
     type: tar
     location: http://172.17.0.1:8080/helm_charts/starlingx/jenkins-1.9.2.tgz

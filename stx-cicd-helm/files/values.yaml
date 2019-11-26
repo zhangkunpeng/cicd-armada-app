@@ -1,3 +1,5 @@
-image:
-  repository: docker.io/gitlab/gitlab-ce
-  tag: 10.6.2-ce.0
+images:
+  tags: docker.io/jenkins/jenkins:lts
+---
+images:
+  tags: docker.io/gitlab/gitlab-ce:10.6.2-ce.0

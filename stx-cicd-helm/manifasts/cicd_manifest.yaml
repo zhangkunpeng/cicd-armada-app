@@ -61,6 +61,8 @@ data:
       adminPassword: 99cloud@SH
       serviceType: NodePort
       nodePort: 32000
+      image: docker.io/jenkins/jenkins
+      tag: lts
   source:
     type: tar
     location: http://172.17.0.1:8080/helm_charts/starlingx/jenkins-1.9.2.tgz
@@ -98,7 +100,7 @@ data:
   values:
     gitlabRootPassword: "99cloud@SH"
     externalUrl: http://gitlab.starlingx.com/
-    image: gitlab/gitlab-ce:10.6.2-ce.0
+    image: docker.io/gitlab/gitlab-ce:10.6.2-ce.0
   source:
     type: tar
     location: http://172.17.0.1:8080/helm_charts/starlingx/gitlab-ce-0.2.2.tgz

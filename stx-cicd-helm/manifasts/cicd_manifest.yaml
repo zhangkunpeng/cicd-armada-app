@@ -58,6 +58,8 @@ data:
             component: test
   values:
     master:
+      namespaceOverride: stx-cicd
+      slaveKubernetesNamespace: stx-cicd
       adminPassword: 99cloud@SH
       serviceType: NodePort
       nodePort: 32222

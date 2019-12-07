@@ -39,7 +39,6 @@ spec:
         {{ $key }}: {{ $val | quote }}
         {{- end}}
       annotations:
-        checksum/config: {{ include (print $.Template.BasePath "/config.yaml") . | sha256sum }}
         {{- if .Values.master.podAnnotations }}
 {{ toYaml .Values.master.podAnnotations | indent 8 }}
         {{- end }}
